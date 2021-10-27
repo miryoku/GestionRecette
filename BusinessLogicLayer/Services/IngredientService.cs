@@ -23,6 +23,11 @@ namespace BusinessLogicLayer.Services
             return _service.Delete(Id);
         }
 
+        public void DeleteUstensile(int model)
+        {
+            _service.DeleteLienTable(model);
+        }
+
         public IEnumerable<Ingredient> GetAll()
         {
             return _service.GetAll().Select(x => x.ToBLL());
@@ -33,14 +38,29 @@ namespace BusinessLogicLayer.Services
             return _service.GetById(Id).ToBLL();
         }
 
+        public Intermediaire GetByIdIntermediaire(int Id)
+        {
+            return _service.GetByIdIntermediaire(Id).ToBLL();
+        }
+
         public int Insert(Ingredient model)
         {
             return _service.Insert(model.ToDAL());
         }
 
+        public void InsertUstensile(Intermediaire model)
+        {
+            _service.InsertLienTable(model.ToDAL());
+        }
+
         public bool Update(Ingredient model)
         {
             return _service.Update(model.ToDAL());
+        }
+
+        public void UpdateUstensile(Intermediaire model)
+        {
+            _service.UpdateLienTable(model.ToDAL());
         }
     }
 }

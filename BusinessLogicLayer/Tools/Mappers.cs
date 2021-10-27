@@ -202,6 +202,7 @@ namespace BusinessLogicLayer.Tools
                 IdRecette = u.IdRecette,
                 IdBis = u.IdBis,
                 Quantite = u.Quantite,
+                IdTries = u.IdTries
 
             };
         }
@@ -215,6 +216,37 @@ namespace BusinessLogicLayer.Tools
                 IdRecette = u.IdRecette,
                 IdBis = u.IdBis,
                 Quantite=u.Quantite,
+                IdTries=u.IdTries
+            };
+        }
+
+        public static DAL.Commentaires ToDAL(this BLL.Commentaires u)
+        {
+            if (u == null)
+            {
+                return null;
+            }
+            return new DAL.Commentaires
+            {
+                Id = u.Id,
+                Id_recette = u.Id_recette,
+                Id_user = u.Id_user,
+                Commentaire=u.Commentaire,
+                Dates=u.Dates,
+
+            };
+        }
+
+        public static BLL.Commentaires ToBLL(this DAL.Commentaires u)
+        {
+            if (u == null) { return null; }
+            return new BLL.Commentaires
+            {
+                Id = u.Id,
+                Id_recette = u.Id_recette,
+                Id_user = u.Id_user,
+                Commentaire = u.Commentaire,
+                Dates = u.Dates,
             };
         }
 

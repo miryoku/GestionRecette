@@ -97,6 +97,8 @@ namespace GestionRecette
             services.AddScoped<IIngredientService, IngredientService>();
             services.AddScoped<IUniteRespository, UnitesRespository>();
             services.AddScoped<IUniteService, UniteService>();
+            services.AddScoped<ICommentaireRespository, CommentaireRespository>();
+            services.AddScoped<ICommentaireService, CommentaireService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

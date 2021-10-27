@@ -13,5 +13,7 @@ namespace DataAccessLayer.Models
         public int IdBis { get; set; }
 
         public int Quantite { get; set; }
+
+        public int IdTries { get; set; }
     }
 }

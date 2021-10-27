@@ -15,5 +15,13 @@ namespace DataAccessLayer.Repositories
         int Insert(Ingredient model);
         bool Update(Ingredient model);
 
+        void InsertLienTable(Intermediaire model);
+
+        void UpdateLienTable(Intermediaire model);
+
+        bool DeleteLienTable(int id);
+
+        Intermediaire GetByIdIntermediaire(int Id);
+
     }
 }

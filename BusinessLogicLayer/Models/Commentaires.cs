@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Models
 {
-    public class Intermediaire
+    public class Commentaires
     {
         public int Id { get; set; }
 
-        public int IdRecette { get; set; }
-        public int IdBis { get; set; }
-        public int Quantite { get; set; }
+        public int Id_user { get; set; }
 
-        public int IdTries { get; set; }
+        public int Id_recette { get; set; }
 
+        public string Commentaire { get; set; }
+
+        public DateTime Dates { get; set; }
     }
 }

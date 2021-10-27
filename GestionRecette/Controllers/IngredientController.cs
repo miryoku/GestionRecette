@@ -95,5 +95,72 @@ namespace GestionRecette.Controllers
                 return Problem(ex.Message);
             }
         }
+
+        [HttpPut("intermediaire/{id}")]
+        public IActionResult PutIntermediaire([FromBody] Intermediaire form)
+        {
+            try
+            {
+                _service.UpdateUstensile(form);
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+
+                return Problem(ex.Message);
+            }
+        }
+
+        [HttpDelete("intermediaire/{id}")]
+        public IActionResult DeleteIntermediaire([FromRoute] int id)
+        {
+            try
+            {
+                _service.DeleteUstensile(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+
+                return Problem(ex.Message);
+            }
+        }
+
+        [HttpGet("intermediaire/{id}")]
+        public IActionResult GetIntermediaire([FromRoute] int id)
+        {
+            try
+            {
+                Intermediaire u = _service.GetByIdIntermediaire(id);
+                if (u is null)
+                {
+                    return NotFound();
+                }
+                return Ok(u);
+            }
+            catch (Exception ex)
+            {
+
+                return Problem(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("intermediaire")]
+        public IActionResult PostIntermediaire([FromBody] Intermediaire form)
+        {
+            try
+            {
+                _service.InsertUstensile(form);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+
+                return Problem(ex.Message);
+            }
+        }
+
     }
 }

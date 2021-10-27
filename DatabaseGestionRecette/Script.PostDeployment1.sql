@@ -38,7 +38,7 @@ insert into Rating(id_user,id_recette,note)
 	values(1,1,4),(2,1,5);
 insert into Favoris(id_user,id_recette)
 	values(2,1);
-insert into Commentaire(id_user,id_recette,commentaire)
-	values(1,1,'une merveuille ce sandwich');
+insert into Commentaire(id_user,id_recette,commentaire,dates)
+	values(1,1,'une merveuille ce sandwich',GETDATE());
 insert into TUstensiles(id_recette,id_ustensiles,quantite)
 	values(1,1,1),(1,2,1),(1,3,1);

@@ -14,5 +14,12 @@ namespace BusinessLogicLayer.Interface
         bool Delete(int Id);
         int Insert(Ingredient model);
         bool Update(Ingredient model);
+
+        void InsertUstensile(Intermediaire model);
+
+        void UpdateUstensile(Intermediaire model);
+        void DeleteUstensile(int model);
+
+        Intermediaire GetByIdIntermediaire(int Id);
     }
 }

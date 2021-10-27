@@ -101,9 +101,32 @@ namespace DataAccessLayer.Tools
                 Id= (int)reader["Id"],
                 IdBis=(int)reader["IdBis"],
                 IdRecette=(int)reader["IdRecette"],
-                Quantite=(int)reader["Quantite"]
+                Quantite=(int)reader["Quantite"],
             };
         }
 
+        public static Intermediaire Intermediaire2Converter(IDataReader reader)
+        {
+            return new Intermediaire
+            {
+                Id = (int)reader["Id"],
+                IdBis = (int)reader["IdBis"],
+                IdRecette = (int)reader["IdRecette"],
+                Quantite = (int)reader["Quantite"],
+                IdTries = (int)reader["idTries"]
+            };
+        }
+
+        public static Commentaires CommentaireConverter(IDataReader reader)
+        {
+            return new Commentaires
+            {
+                Id = (int)reader["Id"],
+                Id_recette = (int)reader["Id_recette"],
+                Id_user = (int)reader["Id_user"],
+                Commentaire=reader["Commentaire"].ToString(),
+                Dates=(DateTime)reader["dates"]
+            };
+        }
     }
 }
