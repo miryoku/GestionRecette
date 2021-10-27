@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer.Interface;
 using BusinessLogicLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -52,6 +53,7 @@ namespace GestionRecette.Controllers
             }
         }
         [HttpPost]
+        [Authorize("user")]
         public IActionResult Post([FromBody] Ustensiles form)
         {
             try
@@ -68,6 +70,7 @@ namespace GestionRecette.Controllers
 
         [HttpPost]
         [Route("intermediaire")]
+        [Authorize("user")]
         public IActionResult PostIntermediaire([FromBody] Intermediaire form)
         {
             try
@@ -83,6 +86,7 @@ namespace GestionRecette.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize("user")]
         public IActionResult Put([FromBody] Ustensiles form)
         {
             try
@@ -98,6 +102,7 @@ namespace GestionRecette.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize("user")]
         public IActionResult Delete([FromRoute] int id)
         {
             try
@@ -113,6 +118,7 @@ namespace GestionRecette.Controllers
         }
 
         [HttpPut("intermediaire/{id}")]
+        [Authorize("user")]
         public IActionResult PutIntermediaire([FromBody] Intermediaire form)
         {
             try
@@ -129,6 +135,7 @@ namespace GestionRecette.Controllers
         }
 
         [HttpDelete("intermediaire/{id}")]
+        [Authorize("user")]
         public IActionResult DeleteIntermediaire([FromRoute] int id)
         {
             try

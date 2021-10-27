@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer.Interface;
 using BusinessLogicLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -52,6 +53,7 @@ namespace GestionRecette.Controllers
             }
         }
         [HttpPost]
+        [Authorize("user")]
         public IActionResult Post([FromBody] Unites form)
         {
             try
@@ -67,6 +69,7 @@ namespace GestionRecette.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize("user")]
         public IActionResult Put([FromBody] Unites form)
         {
             try
@@ -82,6 +85,7 @@ namespace GestionRecette.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize("user")]
         public IActionResult Delete([FromRoute] int id)
         {
             try

@@ -39,7 +39,6 @@ namespace GestionRecette.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize("user")]
         public IActionResult Get([FromRoute] int id)
         {
             try
