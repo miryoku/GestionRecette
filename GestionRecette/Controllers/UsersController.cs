@@ -115,7 +115,7 @@ namespace GestionRecette.Controllers
             if (login is null) return new ForbidResult("interdit");
 
 
-            return Ok(userLogin);
+            return Ok(userLogin.Token);
         }
     }
 
