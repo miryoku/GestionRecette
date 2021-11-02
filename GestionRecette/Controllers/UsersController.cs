@@ -20,7 +20,7 @@ namespace GestionRecette.Controllers
             _service = userService;
             _tokenManager = tokenManager;
         }
-       
+
 
 
         [HttpGet]
@@ -44,7 +44,7 @@ namespace GestionRecette.Controllers
             try
             {
                 Users u = _service.GetById(id);
-                if(u is null)
+                if (u is null)
                 {
                     return NotFound();
                 }
@@ -108,14 +108,20 @@ namespace GestionRecette.Controllers
         [Route("login")]
         public IActionResult Login([FromBody] Users login)
         {
-            if (login is null) return BadRequest("user null");
+            try
+            {
+                if (login is null) return BadRequest("user null");
+                Console.WriteLine(_service.Login(login).ToToken());
+                User userLogin = _tokenManager.Authenticate(_service.Login(login).ToToken());
+                if (login is null) return new ForbidResult("interdit");
+                // return Ok(new { token = userLogin.Token });
+                return Ok(userLogin);
+            }
+            catch (Exception ex)
+            {
 
-            User userLogin = _tokenManager.Authenticate(_service.Login(login).ToToken());
-
-            if (login is null) return new ForbidResult("interdit");
-
-
-            return Ok(userLogin.Token);
+                return Problem(ex.Message);
+            }
         }
     }
 

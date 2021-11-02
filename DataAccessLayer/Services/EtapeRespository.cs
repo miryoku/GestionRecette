@@ -75,6 +75,14 @@ namespace DataAccessLayer.Services
             return true;
         }
 
+        public IEnumerable<Intermediaire> GetByIdTEtape(int id)
+        {
+            Command cmd = new Command("select id,id_recette idRecette,id_etape idBis from tetape where id_recette=@id");
+            Connection cnx = new Connection(SqlClientFactory.Instance,_connectionString);
+            cmd.AddParameter("id", id);
+            return   cnx.ExecuteReader<Intermediaire>(cmd, Mappers.Intermediaire3Converter);
+        }
+
         
     }
 }

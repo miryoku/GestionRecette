@@ -23,7 +23,7 @@ namespace DataAccessLayer.Models
         public int Repos { get; set; }
 
         public int Cuisson { get; set; }
-        public decimal Rating { get; set; }
+        public string Rating { get; set; }
 
     }
 }

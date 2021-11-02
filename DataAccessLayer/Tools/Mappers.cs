@@ -32,7 +32,7 @@ namespace DataAccessLayer.Tools
                 Img = reader["Img"].ToString(),
                 NbPersonne = (int)reader["NbPersonne"],
                 NomCategorie = reader["NomCategorie"].ToString(),
-                Rating = (decimal)reader["rating"],
+                Rating = reader["rating"].ToString(),
             };
         }
 
@@ -49,7 +49,7 @@ namespace DataAccessLayer.Tools
                 Prepration = (int)reader["Preparation"],
                 Repos = (int)reader["Repos"],
                 Cuisson = (int)reader["Cuisson"],
-                Rating=(decimal)reader["rating"]
+                Rating=reader["rating"].ToString()
             };
         }
 
@@ -117,6 +117,17 @@ namespace DataAccessLayer.Tools
             };
         }
 
+        public static Intermediaire Intermediaire3Converter(IDataReader reader)
+        {
+            return new Intermediaire
+            {
+                Id = (int)reader["Id"],
+                IdBis = (int)reader["IdBis"],
+                IdRecette = (int)reader["IdRecette"],
+               
+            };
+        }
+
         public static Commentaires CommentaireConverter(IDataReader reader)
         {
             return new Commentaires
@@ -128,5 +139,7 @@ namespace DataAccessLayer.Tools
                 Dates=(DateTime)reader["dates"]
             };
         }
+
+        
     }
 }

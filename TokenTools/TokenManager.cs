@@ -17,9 +17,9 @@ namespace TokenTools
         public static string Audience = "maconsomation.com";
         public User Authenticate(User user)
         {
-            if(user.Speudo is null && user.Mdp is null)
+            if(user is null)
             {
-                throw new ArgumentNullException();
+                return null;
             }
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
             SigningCredentials credetials = new SigningCredentials(securityKey,SecurityAlgorithms.HmacSha512);

@@ -52,6 +52,24 @@ namespace GestionRecette.Controllers
                 return Problem(ex.Message);
             }
         }
+
+     
+        [HttpGet("intermediaire/{id}")]
+        public IActionResult GetIntermediaire([FromRoute] int id)
+        {
+            try
+            {
+                return Ok(_service.GetByIdTEtape(id));
+            }
+            catch (Exception ex)
+            {
+
+                return Problem(ex.Message);
+            }
+        }
+
+
+
         [HttpPost]
         [Authorize("user")]
         public IActionResult Post([FromBody] Etapes form)
@@ -99,5 +117,7 @@ namespace GestionRecette.Controllers
                 return Problem(ex.Message);
             }
         }
+
+
     }
 }

@@ -44,5 +44,10 @@ namespace BusinessLogicLayer.Services
         {
             return _service.Update(model.ToDAL());
         }
+
+        public IEnumerable<Intermediaire> GetByIdTEtape(int id)
+        {
+            return _service.GetByIdTEtape(id).Select(x => x.ToBLL());
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace DataAccessLayer.Services
 
         public IEnumerable<Recette> GetAll()
         {
-            Command cmd = new Command("select r.Id, r.nom, r.nbPersonne, r.img, c.nom NomCategorie, AVG(ra.note) rating from Recette r, Categorie c, Rating ra where r.id_categorie = c.Id and ra.id_recette = r.Id group by r.Id, r.nom, r.nbPersonne, r.img, c.nom ");
+            Command cmd = new Command("SELECT Recette.Id, Recette.nom, Recette.nbPersonne, Recette.img, Categorie.nom NomCategorie, AVG(Rating.note) rating FROM Recette INNER JOIN Categorie ON Recette.id_categorie = Categorie.Id LEFT OUTER JOIN Rating ON Recette.Id = Rating.id_recette group by Recette.Id, Recette.nom, REcette.nbPersonne, Recette.img, Categorie.nom");
             Connection cnx = new Connection(SqlClientFactory.Instance, _connectionString);
             return cnx.ExecuteReader<Recette>(cmd, Mappers.RecetteConverter);
         }

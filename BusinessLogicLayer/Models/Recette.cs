@@ -23,7 +23,7 @@ namespace BusinessLogicLayer.Models
 
         public int Cuisson { get; set; }
         public int Id_categorie { get; set; }
-        public decimal Rating { get; set; }
+        public string Rating { get; set; }
 
 
     }

@@ -14,5 +14,7 @@ namespace BusinessLogicLayer.Interface
         bool Delete(int Id);
         int Insert(Etapes model);
         bool Update(Etapes model);
+
+        IEnumerable<Intermediaire> GetByIdTEtape(int id);
     }
 }

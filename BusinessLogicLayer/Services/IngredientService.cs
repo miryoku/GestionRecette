@@ -38,9 +38,9 @@ namespace BusinessLogicLayer.Services
             return _service.GetById(Id).ToBLL();
         }
 
-        public Intermediaire GetByIdIntermediaire(int Id)
+        public IEnumerable<Intermediaire>GetByIdIntermediaire(int Id)
         {
-            return _service.GetByIdIntermediaire(Id).ToBLL();
+            return _service.GetByIdIntermediaire(Id).Select(x => x.ToBLL());
         }
 
         public int Insert(Ingredient model)

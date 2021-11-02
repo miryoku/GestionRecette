@@ -23,6 +23,7 @@ namespace GestionRecette
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,6 +34,8 @@ namespace GestionRecette
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -62,11 +65,15 @@ namespace GestionRecette
                     }
                 });
             });
-
+            services.AddCors(options => options.AddPolicy("GestionRecette", builder => {
+                builder.AllowAnyOrigin();
+                builder.AllowAnyMethod();
+                builder.AllowAnyHeader();
+            }));
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("admin", policy => policy.RequireRole("admin"));
-                options.AddPolicy("user", policy => policy.RequireRole("user", "admin"));
+                options.AddPolicy("user", policy => policy.RequireRole("users", "admin"));
             });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -106,6 +113,7 @@ namespace GestionRecette
         {
             if (env.IsDevelopment())
             {
+                app.UseCors("GestionRecette");
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GestionRecette v1"));

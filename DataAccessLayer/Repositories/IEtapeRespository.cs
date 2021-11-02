@@ -16,5 +16,7 @@ namespace DataAccessLayer.Repositories
         bool Update(Etapes model);
 
         void InsertLienTAble(int idEtape, int idRecette);
+
+        IEnumerable<Intermediaire> GetByIdTEtape(int id);
     }
 }
