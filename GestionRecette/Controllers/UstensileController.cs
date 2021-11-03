@@ -155,12 +155,8 @@ namespace GestionRecette.Controllers
         {
             try
             {
-                Intermediaire u = _service.GetByIdIntermediaire(id);
-                if (u is null)
-                {
-                    return NotFound();
-                }
-                return Ok(u);
+              
+                return Ok(_service.GetByIdIntermediaire(id));
             }
             catch (Exception ex)
             {

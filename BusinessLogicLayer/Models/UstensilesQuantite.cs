@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Models
 {
-    public class Ustensiles
+    public class UstensilesQuantite
     {
-        public int Id { get; set; }
+        public Ustensiles Ustensiles{ get; set; }
 
-        public string Nom { get; set; }
-        public string Img { get; set; }
-
+        public int Quantite{ get; set; }
     }
 }

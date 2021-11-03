@@ -51,12 +51,12 @@ namespace DataAccessLayer.Services
             return cnx.ExecuteReader<Ustensile>(cmd, Mappers.UstensileConverter).FirstOrDefault();
         }
 
-        public Intermediaire GetByIdIntermediaire(int Id)
+        public IEnumerable<Intermediaire> GetByIdIntermediaire(int Id)
         {
-            Command cmd = new Command("select id,id_recette idRecette,id_ustensiles idBis,quantite from TUstensiles where Id=@id");
+            Command cmd = new Command("select id,id_recette idRecette,id_ustensiles idBis,quantite from TUstensiles where Id_Recette=@id");
             cmd.AddParameter("id", Id);
             Connection cnx = new Connection(SqlClientFactory.Instance, _connectionString);
-            return cnx.ExecuteReader<Intermediaire>(cmd, Mappers.IntermediaireConverter).FirstOrDefault();
+            return cnx.ExecuteReader<Intermediaire>(cmd, Mappers.IntermediaireConverter);
         }
 
         public int Insert(Ustensile model)

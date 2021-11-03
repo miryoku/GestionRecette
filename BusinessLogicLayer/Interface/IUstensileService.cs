@@ -20,6 +20,6 @@ namespace BusinessLogicLayer.Interface
         void UpdateUstensile(Intermediaire model);
         void DeleteUstensile(int model);
 
-       Intermediaire GetByIdIntermediaire(int Id);
+        IEnumerable<Intermediaire> GetByIdIntermediaire(int Id);
     }
 }

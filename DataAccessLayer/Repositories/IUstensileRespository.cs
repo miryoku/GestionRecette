@@ -21,6 +21,6 @@ namespace DataAccessLayer.Repositories
 
         bool DeleteLienTable(int id);
 
-        Intermediaire GetByIdIntermediaire(int Id);
+        IEnumerable<Intermediaire> GetByIdIntermediaire(int Id);
     }
 }

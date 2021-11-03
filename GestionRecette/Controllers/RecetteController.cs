@@ -39,7 +39,7 @@ namespace GestionRecette.Controllers
         {
             try
             {
-                Recette u = _service.GetById(id);
+                RecetteComplete u = _service.GetById(id);
                 if (u is null)
                 {
                     return NotFound();

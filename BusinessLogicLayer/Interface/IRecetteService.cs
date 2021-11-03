@@ -10,7 +10,7 @@ namespace BusinessLogicLayer.Interface
     public interface IRecetteService
     {
         IEnumerable<Recette> GetAll();
-        Recette GetById(int Id);
+        RecetteComplete GetById(int Id);
         bool Delete(int Id);
         int Insert(Recette model);
         bool Update(Recette model);

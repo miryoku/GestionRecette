@@ -14,9 +14,23 @@ namespace BusinessLogicLayer.Services
     {
         private IRecetteRespository _RecetteService;
 
-        public RecetteService(IRecetteRespository ReceteRepo)
+        private IIngredientRespository _serviceIngredient;
+
+        private IUniteRespository _serviceUnite;
+
+        private IUstensileRespository _serviceUstensile;
+
+
+        private IEtapeRespository _serviceEtape;
+
+
+        public RecetteService(IRecetteRespository ReceteRepo, IIngredientRespository ingredientRespository, IUniteRespository respo, IUstensileRespository serv, IEtapeRespository etapeService)
         {
             _RecetteService = ReceteRepo;
+            _serviceIngredient = ingredientRespository;
+            _serviceUnite = respo;
+            _serviceUstensile = serv;
+            _serviceEtape= etapeService;
         }
         public bool Delete(int Id)
         {
@@ -28,9 +42,48 @@ namespace BusinessLogicLayer.Services
             return _RecetteService.GetAll().Select(x=>x.ToBLL());
         }
 
-        public Recette GetById(int Id)
+        public RecetteComplete GetById(int Id)
         {
-            return _RecetteService.GetById(Id).ToBLL();
+            Recette recette= _RecetteService.GetById(Id).ToBLL();
+            IEnumerable<Intermediaire> intermediaire = _serviceIngredient.GetByIdIntermediaire(Id).Select(x => x.ToBLL());
+            List<Ingredient>ingredients = new List<Ingredient>();
+            List<Unites>unites = new List<Unites>(); 
+            List <IngredientQuantiteUnite> iqus = new List<IngredientQuantiteUnite>(); 
+           
+            foreach (var item in intermediaire)       
+            {
+                IngredientQuantiteUnite iqu = new IngredientQuantiteUnite();
+                ingredients.Add(_serviceIngredient.GetById(item.IdBis).ToBLL());
+                unites.Add(_serviceUnite.GetById(item.IdTries).ToBLL());
+                iqu.Quantite = item.Quantite;
+                iqu.Ingredients = ingredients[ingredients.Count-1];
+                iqu.Unites = unites[unites.Count-1];
+                iqus.Add(iqu);
+
+            }
+            IEnumerable<Intermediaire> itermediaireUstensile = _serviceUstensile.GetByIdIntermediaire(Id).Select(x => x.ToBLL());
+            List<Ustensiles> ustensiles = new List<Ustensiles>();
+            List<UstensilesQuantite> ustensilesQuantites = new List<UstensilesQuantite>();
+            foreach (var item in itermediaireUstensile)
+            {
+                UstensilesQuantite uq= new UstensilesQuantite();
+                ustensiles.Add(_serviceUstensile.GetById(item.IdBis).ToBLL());
+                uq.Quantite = item.Quantite;
+                uq.Ustensiles=ustensiles[ustensiles.Count-1];
+                ustensilesQuantites.Add(uq);
+            }
+            IEnumerable<Intermediaire> intermediaresEtape= _serviceEtape.GetByIdTEtape(Id).Select(x => x.ToBLL());
+            List<Etapes>etapes = new List<Etapes>();
+            foreach (var item in intermediaresEtape)
+            {
+                etapes.Add(_serviceEtape.GetById(item.IdBis).ToBLL());
+            }
+            RecetteComplete rc=new RecetteComplete();
+            rc.recette = recette;
+            rc.Composant = iqus;
+            rc.Ustensiles = ustensilesQuantites;
+            rc.Etapes = etapes;
+            return rc;
         }
 
         public int Insert(Recette model)
