@@ -4,14 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogicLayer.Models
+namespace DataAccessLayer.Models
 {
-    public class UstensilesQuantite
+    public class Categorie
     {
         public int Id { get; set; }
-
-        public Ustensiles Ustensiles{ get; set; }
-
-        public int Quantite{ get; set; }
+        public string Nom { get; set; }
     }
 }

@@ -1,30 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using BusinessLogicLayer.Interface;
-using System;
+﻿using BusinessLogicLayer.Interface;
 using BusinessLogicLayer.Models;
 using Microsoft.AspNetCore.Authorization;
-using TokenTools;
-using GestionRecette.Tools;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace GestionRecette.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class CategorieController : ControllerBase
     {
-        private IUsersService _service;
-        private readonly ITokenManager _tokenManager;
+        private ICategorieService _service;
 
-        public UsersController(IUsersService userService, ITokenManager tokenManager)
+        public CategorieController(ICategorieService categorieService)
         {
-            _service = userService;
-            _tokenManager = tokenManager;
+            _service = categorieService;
         }
 
-
-
         [HttpGet]
-        [Authorize("admin")]
         public IActionResult GetAll()
         {
             try
@@ -37,18 +31,17 @@ namespace GestionRecette.Controllers
                 return Problem(ex.Message);
             }
         }
-
         [HttpGet("{id}")]
         public IActionResult Get([FromRoute] int id)
         {
             try
             {
-                Users u = _service.GetById(id);
-                if (u is null)
+                Categorie c = _service.GetById(id); 
+                if(c is null)
                 {
                     return NotFound();
                 }
-                return Ok(u);
+                return Ok(c);
             }
             catch (Exception ex)
             {
@@ -58,7 +51,8 @@ namespace GestionRecette.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Users form)
+        [Authorize("user")]
+        public IActionResult Post([FromBody] Categorie form)
         {
             try
             {
@@ -73,11 +67,11 @@ namespace GestionRecette.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put([FromBody] Users form)
+        [Authorize("user")]
+        public IActionResult Put([FromBody] Categorie form)
         {
             try
             {
-
                 _service.Update(form);
                 return NoContent();
             }
@@ -103,25 +97,5 @@ namespace GestionRecette.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("login")]
-        public IActionResult Login([FromBody] Users login)
-        {
-            try
-            {
-                if (login is null) return BadRequest("user null");
-                Console.WriteLine(_service.Login(login).ToToken());
-                User userLogin = _tokenManager.Authenticate(_service.Login(login).ToToken());
-                if (login is null) return new ForbidResult("interdit");
-                // return Ok(new { token = userLogin.Token });
-                return Ok(userLogin);
-            }
-            catch (Exception ex)
-            {
-
-                return Problem(ex.Message);
-            }
-        }
     }
-
 }

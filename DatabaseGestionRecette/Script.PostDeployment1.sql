@@ -26,10 +26,8 @@ insert into Categorie(nom) values('Sandwich');
 insert into etape(etape,instruction) values(1,'Découper la tomate en tranches fines.'),(2,'Tartiner la galette de maïs de chèvre frais et y disposer la salade, les tranches de tomate et le jambon.'),
 	(3,'Les ingrédients doivent bien recouvrir toute la surface de la galette.'),
 	(4,'Enrouler la galette (de préférence assez serré pour que les ingrédients ne tombent pas) puis la couper en deux morceaux de taille égale afin d obtenir deux petits sandwiches enroulés beaucoup plus faciles à manger!')
-insert into Recette(nom,nbPersonne,id_categorie)
-	values('Sandwich de tortillas',1,1);
-insert into temp(preparation,repos,cuisson,id_recette)
-	values(5,0,0,1);
+insert into Recette(nom,nbPersonne,id_categorie,preparation,repos,cuisson)
+	values('Sandwich de tortillas',1,1,5,0,0);
 insert into TEtape(id_etape,id_recette) 
 	values(1,1),(2,1),(3,1),(4,1);
 insert into TIngredient(id_recette,id_ingredient,id_unite,quantite)

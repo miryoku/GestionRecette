@@ -53,6 +53,24 @@ namespace DataAccessLayer.Tools
             };
         }
 
+        public static Recette RecetteAllConverterNotRating(IDataReader reader)
+        {
+            return new Recette
+            {
+
+                Id = (int)reader["Id"],
+                Nom = reader["Nom"].ToString(),
+                Img = reader["Img"].ToString(),
+                NbPersonne = (int)reader["NbPersonne"],
+                NomCategorie = reader["NomCategorie"].ToString(),
+                Prepration = (int)reader["Preparation"],
+                Repos = (int)reader["Repos"],
+                Cuisson = (int)reader["Cuisson"],
+            };
+        }
+
+
+
         public static Etapes EtapeConverter(IDataReader reader)
         {
             return new Etapes
@@ -140,6 +158,14 @@ namespace DataAccessLayer.Tools
             };
         }
 
+        public static Categorie CategorieConverter(IDataReader reader)
+        {
+            return new Categorie
+            {
+                Id = (int)reader["Id"],
+                Nom = reader["Nom"].ToString()
+            };
+        }
         
     }
 }

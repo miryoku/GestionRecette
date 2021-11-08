@@ -53,6 +53,7 @@ namespace BusinessLogicLayer.Services
             foreach (var item in intermediaire)       
             {
                 IngredientQuantiteUnite iqu = new IngredientQuantiteUnite();
+                iqu.id = item.Id;
                 ingredients.Add(_serviceIngredient.GetById(item.IdBis).ToBLL());
                 unites.Add(_serviceUnite.GetById(item.IdTries).ToBLL());
                 iqu.Quantite = item.Quantite;
@@ -67,6 +68,7 @@ namespace BusinessLogicLayer.Services
             foreach (var item in itermediaireUstensile)
             {
                 UstensilesQuantite uq= new UstensilesQuantite();
+                uq.Id= item.Id;
                 ustensiles.Add(_serviceUstensile.GetById(item.IdBis).ToBLL());
                 uq.Quantite = item.Quantite;
                 uq.Ustensiles=ustensiles[ustensiles.Count-1];

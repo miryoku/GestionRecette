@@ -66,7 +66,6 @@
     <Build Include="Table\Recette.sql" />
     <Build Include="Table\TUstensiles.sql" />
     <Build Include="Table\Ustensiles.sql" />
-    <Build Include="Table\Temp.sql" />
     <Build Include="Table\TIngredient.sql" />
     <Build Include="Table\Ingredient.sql" />
     <Build Include="Table\Unite.sql" />

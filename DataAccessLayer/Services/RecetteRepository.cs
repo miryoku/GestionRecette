@@ -38,33 +38,51 @@ namespace DataAccessLayer.Services
 
         public Recette GetById(int Id)
         {
-            Command cmd = new Command("select r.Id,r.nom,r.nbPersonne,r.img,c.nom NomCategorie,t.cuisson,t.preparation,t.repos , avg(ra.note) rating from Recette r, Categorie c, Temp t, Rating ra where r.id_categorie = c.Id and t.id_recette = c.Id and ra.id_recette = r.Id and r.id = @id group by r.Id, r.nom, r.nbPersonne, r.img, c.nom, t.cuisson, t.preparation, t.repos ");
+            Command cmd = new Command("select r.Id,r.nom,r.nbPersonne,r.img,c.nom NomCategorie,r.cuisson,r.preparation,r.repos , avg(ra.note) rating  from Recette r, Categorie c, Rating ra where r.id_categorie = c.Id and ra.id_recette = r.Id and r.id = @id group by r.Id, r.nom, r.nbPersonne, r.img, c.nom, r.cuisson, r.preparation, r.repos ");
             cmd.AddParameter("id", Id);
             Connection cnx = new Connection(SqlClientFactory.Instance, _connectionString);
-            return cnx.ExecuteReader<Recette>(cmd, Mappers.RecetteAllConverter).FirstOrDefault();
+            Recette r= cnx.ExecuteReader<Recette>(cmd, Mappers.RecetteAllConverter).FirstOrDefault();
 
-            
+            if(r is null)
+            {
+                cmd = new Command("select r.Id,r.nom,r.nbPersonne,r.img,c.nom NomCategorie, r.cuisson,r.preparation,r.repos from Recette r, Categorie c where r.id_categorie = c.Id and r.id = @id group by r.Id, r.nom, r.nbPersonne, r.img, c.nom, r.cuisson, r.preparation, r.repos");
+                cmd.AddParameter("id", Id);
+                cnx = new Connection(SqlClientFactory.Instance, _connectionString);
+                r = cnx.ExecuteReader<Recette>(cmd, Mappers.RecetteAllConverterNotRating).FirstOrDefault();
+              //  r.Rating = "1";
+            }
+            return r;
+
+
         }
 
         public int Insert(Recette model)
         {
-            Command cmd = new Command("insert into Recette(nom,img,nbPersonne,id_categorie)values(@nom,@img,@nbPersonne,@id_categorie)");
+            Command cmd = new Command("insert into Recette(nom,img,nbPersonne,id_categorie,cuisson,preparation,repos)  OUTPUT Inserted.ID  values(@nom,@img,@nbPersonne,@id_categorie,@cuisson,@preparation,@repos)");
             Connection cnx = new Connection(SqlClientFactory.Instance, _connectionString);
             cmd.AddParameter("nom", model.Nom);
             cmd.AddParameter("img", model.Img);
             cmd.AddParameter("nbPersonne", model.NbPersonne);
             cmd.AddParameter("id_categorie", model.Id_categorie);
-            return cnx.ExecuteNonQuery(cmd);
+            cmd.AddParameter("cuisson",model.Cuisson);
+            cmd.AddParameter("preparation", model.Prepration);
+            cmd.AddParameter("repos",model.Repos);
+            int id= (int)cnx.ExecuteScalar(cmd);
+            return id;
+
         }
 
         public bool Update(Recette model)
         {
-            Command cmd = new Command("update recette set nom=@nom,img=@img,nbPersonne=@nbPersonne,id_categorie=id_categorie where id=@id ");
+            Command cmd = new Command("update recette set nom=@nom,img=@img,nbPersonne=@nbPersonne,id_categorie=id_categorie,cuisson=@cuisson,preparation=@preparation,repos=@repos where id=@id ");
             Connection cnx = new Connection(SqlClientFactory.Instance, _connectionString);
             cmd.AddParameter("nom", model.Nom);
             cmd.AddParameter("img", model.Img);
             cmd.AddParameter("nbPersonne", model.NbPersonne);
             cmd.AddParameter("id_categorie", model.Id_categorie);
+            cmd.AddParameter("cuisson", model.Cuisson);
+            cmd.AddParameter("preparation", model.Prepration);
+            cmd.AddParameter("repos", model.Repos);
             cmd.AddParameter("id", model.Id);
             cnx.ExecuteNonQuery(cmd);
             return true;

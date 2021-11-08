@@ -8,6 +8,7 @@ namespace BusinessLogicLayer.Models
 {
     public class IngredientQuantiteUnite
     {
+        public int id { get; set; }
         public Ingredient Ingredients { get; set; }
         public Unites Unites { get; set; }
 

@@ -45,7 +45,7 @@ namespace BusinessLogicLayer.Tools
 
         public static BLL.Recette ToBLL(this DAL.Recette r)
         {
-            
+
             if (r == null)
             {
                 return null;
@@ -57,10 +57,10 @@ namespace BusinessLogicLayer.Tools
                 Img = r.Img,
                 NbPersonne = r.NbPersonne,
                 NomCategorie = r.NomCategorie,
-                Prepration =r.Prepration,
+                Prepration = r.Prepration,
                 Repos = r.Repos,
                 Cuisson = r.Cuisson,
-                Rating=r.Rating
+                Rating = r.Rating
             };
         }
 
@@ -77,11 +77,11 @@ namespace BusinessLogicLayer.Tools
                 Img = r.Img,
                 NbPersonne = r.NbPersonne,
                 NomCategorie = r.NomCategorie,
-                Prepration =r.Prepration,
+                Prepration = r.Prepration,
                 Repos = r.Repos,
                 Cuisson = r.Cuisson,
                 Id_categorie = r.Id_categorie,
-                Rating=r.Rating
+                Rating = r.Rating
             };
         }
 
@@ -106,7 +106,7 @@ namespace BusinessLogicLayer.Tools
             {
                 Id = u.Id,
                 Etape = u.Etape,
-                Instruction=u.Instruction,
+                Instruction = u.Instruction,
 
             };
         }
@@ -185,7 +185,7 @@ namespace BusinessLogicLayer.Tools
             {
                 Id = u.Id,
                 Unite = u.Unite,
-                
+
 
             };
         }
@@ -198,7 +198,7 @@ namespace BusinessLogicLayer.Tools
             }
             return new DAL.Intermediaire
             {
-                Id=u.Id,
+                Id = u.Id,
                 IdRecette = u.IdRecette,
                 IdBis = u.IdBis,
                 Quantite = u.Quantite,
@@ -212,11 +212,11 @@ namespace BusinessLogicLayer.Tools
             if (u == null) { return null; }
             return new BLL.Intermediaire
             {
-                Id=u.Id,
+                Id = u.Id,
                 IdRecette = u.IdRecette,
                 IdBis = u.IdBis,
-                Quantite=u.Quantite,
-                IdTries=u.IdTries
+                Quantite = u.Quantite,
+                IdTries = u.IdTries
             };
         }
 
@@ -231,8 +231,8 @@ namespace BusinessLogicLayer.Tools
                 Id = u.Id,
                 Id_recette = u.Id_recette,
                 Id_user = u.Id_user,
-                Commentaire=u.Commentaire,
-                Dates=u.Dates,
+                Commentaire = u.Commentaire,
+                Dates = u.Dates,
 
             };
         }
@@ -250,5 +250,28 @@ namespace BusinessLogicLayer.Tools
             };
         }
 
+        public static DAL.Categorie ToDAL(this BLL.Categorie u)
+        {
+            if (u == null)
+            {
+                return null;
+            }
+            return new DAL.Categorie
+            {
+                Id = u.Id,
+                Nom = u.Nom,
+
+            };
+        }
+
+        public static BLL.Categorie ToBLL(this DAL.Categorie u)
+        {
+            if (u == null) { return null; }
+            return new BLL.Categorie
+            {
+                Id = u.Id,
+                Nom = u.Nom,
+            };
+        }
     }
 }
